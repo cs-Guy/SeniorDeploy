@@ -78,22 +78,22 @@ def predict():
             threshold = float(threshold)
         if file is None or file.filename == "":
             return jsonify({
-                'message': 'no file with label id',
+                'message': 'No file with label id',
                 'file': file.filename
-            })
+            }),
         if file2 is None or file2.filename == "":
             return jsonify({
-                'message': 'no file with label face',
+                'message': 'No file with label face',
                 'file': file2.filename
             })
         if not allowed_file(file.filename):
             return jsonify({
-                'message': 'format not supported for label id'
-            })
+                'message': 'File format not supported for label id'
+            }),415
         if not allowed_file(file2.filename):
             return jsonify({
-                'message': 'format not supported for label face'
-            })
+                'message': 'File format not supported for label face'
+            }),415
         
         try:
             img_bytes_id = file.read()
@@ -110,7 +110,7 @@ def predict():
         except:
             return jsonify({
                 'message': 'error during prediction'
-            })
+            }),500
     else :
         return jsonify({
                 'message': 'Error: Use POST method'
